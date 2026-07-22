@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "EstudiaFácil",
+    "slug": "estudiafacil",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#4A90D9"
+    },
+    "userInterfaceStyle": "automatic",
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.estudiafacil.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#4A90D9"
+      },
+      "package": "com.estudiafacil.app"
+    },
+    "plugins": ["expo-secure-store", "expo-notifications"]
+  }
+}
