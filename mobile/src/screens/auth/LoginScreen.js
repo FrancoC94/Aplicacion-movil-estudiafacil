@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, KeyboardAvoidingView, Platform, TouchableOpacit
 import CustomInput from "../../components/common/CustomInput";
 import CustomButton from "../../components/common/CustomButton";
 import { useAuth } from "../../hooks/useAuth";
+import { HealthAPI } from "../../api/endpoints";
 import { validateLoginForm } from "../../utils/validators";
 import { colors } from "../../utils/colors";
 
@@ -13,6 +14,7 @@ export default function LoginScreen({ navigation }) {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [checkingApi, setCheckingApi] = useState(false);
 
   const handleLogin = async () => {
     const validation = validateLoginForm({ email, password });
@@ -26,6 +28,22 @@ export default function LoginScreen({ navigation }) {
       Alert.alert("Error", err?.response?.data?.detail || "No se pudo iniciar sesión");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleHealthCheck = async () => {
+    setCheckingApi(true);
+    try {
+      const { data } = await HealthAPI.check();
+      Alert.alert("API conectada", `Respuesta de /health: ${data.status}`);
+    } catch (err) {
+      const status = err?.response?.status ? ` (HTTP ${err.response.status})` : "";
+      Alert.alert(
+        "No se pudo conectar",
+        `Verifica EXPO_PUBLIC_API_URL, que la API esté en ejecución y que el teléfono y PC compartan red${status}.`
+      );
+    } finally {
+      setCheckingApi(false);
     }
   };
 
@@ -56,6 +74,9 @@ export default function LoginScreen({ navigation }) {
       />
 
       <CustomButton title="Iniciar sesión" onPress={handleLogin} loading={loading} />
+      <TouchableOpacity onPress={handleHealthCheck} disabled={checkingApi} style={styles.healthLink}>
+        <Text style={styles.linkText}>{checkingApi ? "Verificando API..." : "Verificar conexión con la API"}</Text>
+      </TouchableOpacity>
 
       <TouchableOpacity onPress={() => navigation.navigate("Register")} style={styles.link}>
         <Text style={styles.linkText}>¿No tienes cuenta? Regístrate</Text>
@@ -69,5 +90,6 @@ const styles = StyleSheet.create({
   title: { fontSize: 24, fontWeight: "700", color: colors.text },
   subtitle: { marginTop: 6, marginBottom: 24, fontSize: 14, color: colors.textLight },
   link: { marginTop: 16, alignItems: "center" },
+  healthLink: { marginTop: 20, alignItems: "center" },
   linkText: { color: colors.primary, fontWeight: "600" },
 });

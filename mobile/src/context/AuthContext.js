@@ -23,16 +23,23 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     (async () => {
-      const token = await getSecure(STORAGE_KEYS.ACCESS_TOKEN);
-      if (token) {
-        try {
+      try {
+        const token = await getSecure(STORAGE_KEYS.ACCESS_TOKEN);
+        if (token) {
           const { data } = await UserAPI.getMe();
           setUser(data);
-        } catch {
-          await logout();
         }
+      } catch {
+        // Un token inválido, un fallo de red o de SecureStore no debe bloquear
+        // la pantalla inicial: se elimina la sesión y se muestra el login.
+        try {
+          await logout();
+        } catch {
+          setUser(null);
+        }
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     })();
   }, [logout]);
 

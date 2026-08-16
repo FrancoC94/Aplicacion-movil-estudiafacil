@@ -4,9 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bed1ca82-b8e1-4891-a896-51a7972bdbc5" name="Changes" comment="avance aplicaicon movil estudiafacil.iml">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="bed1ca82-b8e1-4891-a896-51a7972bdbc5" name="Changes" comment="🚀 Proyecto EstudiaFácil - App Móvil + Backend&#10;&#10;📱 Aplicación móvil para organización académica&#10;&#10;🏫 Asignatura: Aplicaciones Móviles&#10;👨‍🏫 Docente: Ing. Julio César Hurtado Jerves Mg.&#10;👩‍🎓 Estudiantes:&#10;   - Mayra Reveca Amaguay Herrera&#10;   - Cristhian Javier Franco Muñoz&#10;📅 Fecha: 22 de Julio de 2026&#10;&#10;🛠️ Tecnologías:&#10;- Frontend: React Native + Expo + NativeBase&#10;- Backend: FastAPI + PostgreSQL + SQLAlchemy&#10;- Autenticación: JWT&#10;- Base de Datos: PostgreSQL 18&#10;&#10;✅ Funcionalidades:&#10;- Autenticación con JWT&#10;- Gestión de materias y tareas&#10;- Recordatorios automáticos&#10;- Notificaciones push&#10;- Interfaz profesional&#10;&#10;📁 Estructura:&#10;- mobile/ → App React Native&#10;- backend/ → API FastAPI&#10;- docs/ → Documentación&#10;- deploy/ → Configuración de despliegue">
+      <change afterPath="$PROJECT_DIR$/mobile/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/estudiafacil.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/estudiafacil.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/api/endpoints.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/api/endpoints.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/context/AuthContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/context/AuthContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/screens/auth/LoginScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/screens/auth/LoginScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/screens/auth/RegisterScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/screens/auth/RegisterScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/utils/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/utils/constants.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +32,77 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;FrancoC94&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/FrancoC94/Aplicacion-movil-estudiafacil.git&quot;,
+    &quot;accountId&quot;: &quot;4d9b74d0-116b-4b38-a3fb-2200362d2a70&quot;
+  }
+}</component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0019566057794906" />
+      <entry key="MS500" value="1.5039938864659412" />
+      <entry key="S2" value="2.705833974318894" />
+      <entry key="S5" value="3.352923495966029" />
+      <entry key="S10" value="3.648405704921161" />
+      <entry key="S30" value="3.875789787496068" />
+      <entry key="S60" value="3.93696437772593" />
+      <entry key="M2" value="3.968245287501844" />
+      <entry key="M5" value="3.987240702062916" />
+      <entry key="M10" value="3.9936107354117363" />
+      <entry key="M15" value="3.9957383499888595" />
+      <entry key="M30" value="3.997868103979871" />
+      <entry key="H1" value="3.99893378407271" />
+      <entry key="H2" value="3.999466825036588" />
+      <entry key="H4" value="3.9997333957657943" />
+      <entry key="D1" value="3.999955563634012" />
+      <entry key="W1" value="3.9999936518907266" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.8655658654696239" />
+      <entry key="MS500" value="1.34398902308157" />
+      <entry key="S2" value="2.487487765946716" />
+      <entry key="S5" value="3.2005185339323243" />
+      <entry key="S10" value="3.5547710424408634" />
+      <entry key="S30" value="3.839789589422644" />
+      <entry key="S60" value="3.918298175389023" />
+      <entry key="M2" value="3.95874015273361" />
+      <entry key="M5" value="3.9833966352026295" />
+      <entry key="M10" value="3.9916816385674747" />
+      <entry key="M15" value="3.994450711210431" />
+      <entry key="M30" value="3.9972234963379045" />
+      <entry key="H1" value="3.9986112829735814" />
+      <entry key="H2" value="3.9993055251405933" />
+      <entry key="H4" value="3.9996527334778262" />
+      <entry key="D1" value="3.9999421182051806" />
+      <entry key="W1" value="3.999991731073196" />
+    </decayedShown>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 6
@@ -32,28 +112,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "C:/Users/Cristhian Franco/Desktop/estudiafacil",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "to.speed.mode.migration.done": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Cristhian Franco/Desktop/estudiafacil&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -77,7 +157,15 @@
       <option name="project" value="LOCAL" />
       <updated>1784753813639</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="🚀 Proyecto EstudiaFácil - App Móvil + Backend&#10;&#10;📱 Aplicación móvil para organización académica&#10;&#10;🏫 Asignatura: Aplicaciones Móviles&#10;👨‍🏫 Docente: Ing. Julio César Hurtado Jerves Mg.&#10;👩‍🎓 Estudiantes:&#10;   - Mayra Reveca Amaguay Herrera&#10;   - Cristhian Javier Franco Muñoz&#10;📅 Fecha: 22 de Julio de 2026&#10;&#10;🛠️ Tecnologías:&#10;- Frontend: React Native + Expo + NativeBase&#10;- Backend: FastAPI + PostgreSQL + SQLAlchemy&#10;- Autenticación: JWT&#10;- Base de Datos: PostgreSQL 18&#10;&#10;✅ Funcionalidades:&#10;- Autenticación con JWT&#10;- Gestión de materias y tareas&#10;- Recordatorios automáticos&#10;- Notificaciones push&#10;- Interfaz profesional&#10;&#10;📁 Estructura:&#10;- mobile/ → App React Native&#10;- backend/ → API FastAPI&#10;- docs/ → Documentación&#10;- deploy/ → Configuración de despliegue">
+      <option name="closed" value="true" />
+      <created>1784754881242</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1784754881243</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -96,6 +184,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="avance aplicaicon movil estudiafacil.iml" />
-    <option name="LAST_COMMIT_MESSAGE" value="avance aplicaicon movil estudiafacil.iml" />
+    <MESSAGE value="avance aplicacion movil estudiafacil.iml" />
+    <MESSAGE value=" Proyecto EstudiaFácil - App Móvil + Backend&#10;&#10; Aplicación móvil para organización académica&#10;&#10; Asignatura: Aplicaciones Móviles&#10;‍ Docente: Ing. Julio César Hurtado Jerves Mg.&#10;‍ Estudiantes:&#10;   - Mayra Reveca Amaguay Herrera&#10;   - Cristhian Javier Franco Muñoz&#10; Fecha: 22 de Julio de 2026&#10;&#10;️ Tecnologías:&#10;- Frontend: React Native + Expo + NativeBase&#10;- Backend: FastAPI + PostgreSQL + SQLAlchemy&#10;- Autenticación: JWT&#10;- Base de Datos: PostgreSQL 18&#10;&#10;✅ Funcionalidades:&#10;- Autenticación con JWT&#10;- Gestión de materias y tareas&#10;- Recordatorios automáticos&#10;- Notificaciones push&#10;- Interfaz profesional&#10;&#10; Estructura:&#10;- mobile/ → App React Native&#10;- backend/ → API FastAPI&#10;- docs/ → Documentación&#10;- deploy/ → Configuración de despliegue" />
+    <option name="LAST_COMMIT_MESSAGE" value=" Proyecto EstudiaFácil - App Móvil + Backend&#10;&#10; Aplicación móvil para organización académica&#10;&#10; Asignatura: Aplicaciones Móviles&#10;‍ Docente: Ing. Julio César Hurtado Jerves Mg.&#10;‍ Estudiantes:&#10;   - Mayra Reveca Amaguay Herrera&#10;   - Cristhian Javier Franco Muñoz&#10; Fecha: 22 de Julio de 2026&#10;&#10;️ Tecnologías:&#10;- Frontend: React Native + Expo + NativeBase&#10;- Backend: FastAPI + PostgreSQL + SQLAlchemy&#10;- Autenticación: JWT&#10;- Base de Datos: PostgreSQL 18&#10;&#10;✅ Funcionalidades:&#10;- Autenticación con JWT&#10;- Gestión de materias y tareas&#10;- Recordatorios automáticos&#10;- Notificaciones push&#10;- Interfaz profesional&#10;&#10; Estructura:&#10;- mobile/ → App React Native&#10;- backend/ → API FastAPI&#10;- docs/ → Documentación&#10;- deploy/ → Configuración de despliegue" />
   </component>
 </project>

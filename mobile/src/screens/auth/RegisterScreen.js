@@ -5,6 +5,7 @@ import CustomInput from "../../components/common/CustomInput";
 import CustomButton from "../../components/common/CustomButton";
 import { useAuth } from "../../hooks/useAuth";
 import { validateRegisterForm } from "../../utils/validators";
+import { API_URL } from "../../utils/constants";
 import { colors } from "../../utils/colors";
 
 export default function RegisterScreen({ navigation }) {
@@ -24,7 +25,11 @@ export default function RegisterScreen({ navigation }) {
     try {
       await register(nombre, email, password);
     } catch (err) {
-      Alert.alert("Error", err?.response?.data?.detail || "No se pudo crear la cuenta");
+      const detail = err?.response?.data?.detail;
+      const message = Array.isArray(detail)
+        ? detail.map((item) => item.msg).join("\n")
+        : detail || `No hubo respuesta de ${API_URL}\n${err?.message || "Error de red"}`;
+      Alert.alert("No se pudo crear la cuenta", message);
     } finally {
       setLoading(false);
     }

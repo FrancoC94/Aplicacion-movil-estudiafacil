@@ -1,5 +1,10 @@
 import apiClient from "./client";
 
+// Endpoint público, útil para verificar que el dispositivo alcanza la API.
+export const HealthAPI = {
+  check: () => apiClient.get("/health"),
+};
+
 export const AuthAPI = {
   register: (data) => apiClient.post("/auth/register", data),
   login: (email, password) => {
