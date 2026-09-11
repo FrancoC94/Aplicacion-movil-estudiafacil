@@ -17,6 +17,10 @@ class TokenResponse(BaseModel):
     token_type: str
 
 
+class RefreshRequest(BaseModel):
+    refresh_token: str
+
+
 @router.post("/register", response_model=UserOut, status_code=201)
 @limiter.limit("10/minute")
 def register(request: Request, data: UserCreate, db: Session = Depends(get_db)):
@@ -30,3 +34,9 @@ def login(request: Request, form_data: OAuth2PasswordRequestForm = Depends(), db
     service = AuthService(db)
     user = service.authenticate(form_data.username, form_data.password)
     return service.create_tokens(user)
+
+
+@router.post("/refresh", response_model=TokenResponse)
+def refresh(data: RefreshRequest, db: Session = Depends(get_db)):
+    service = AuthService(db)
+    return service.refresh_tokens(data.refresh_token)

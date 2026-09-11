@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { Appearance } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { colors } from "../utils/colors";
+import { lightPalette, darkPalette, colors } from "../utils/colors";
 import { STORAGE_KEYS } from "../utils/constants";
 
 const ThemeContext = createContext(null);
@@ -13,7 +13,9 @@ export function ThemeProvider({ children }) {
   useEffect(() => {
     (async () => {
       const stored = await AsyncStorage.getItem(STORAGE_KEYS.THEME);
-      if (stored) setIsDark(stored === "dark");
+      if (stored) {
+        setIsDark(stored === "dark");
+      }
     })();
   }, []);
 
@@ -23,12 +25,14 @@ export function ThemeProvider({ children }) {
     await AsyncStorage.setItem(STORAGE_KEYS.THEME, next ? "dark" : "light");
   };
 
+  const activeColors = isDark ? darkPalette : lightPalette;
+
   const theme = {
     isDark,
-    background: isDark ? colors.backgroundDark : colors.background,
-    surface: isDark ? colors.surfaceDark : colors.surface,
-    text: isDark ? colors.textDark : colors.text,
-    primary: colors.primary,
+    ...activeColors,
+    // Preservamos las constantes funcionales
+    prioridad: colors.prioridad,
+    estado: colors.estado
   };
 
   return (

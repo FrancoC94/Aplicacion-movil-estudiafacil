@@ -1,31 +1,89 @@
 import { TareasAPI, MateriasAPI } from "../api/endpoints";
-import { storageService } from "./storageService";
+import { dbService } from "./dbService";
+import * as NetInfo from "@react-native-community/netinfo";
 
-const CACHE_KEYS = { TAREAS: "cache:tareas", MATERIAS: "cache:materias" };
-
-/**
- * Servicio simple de sincronización offline:
- * intenta traer datos frescos del servidor y, si falla (sin conexión),
- * regresa la última copia guardada localmente.
- */
 export const syncService = {
   async getTareas() {
     try {
-      const { data } = await TareasAPI.list();
-      await storageService.set(CACHE_KEYS.TAREAS, data);
-      return data;
-    } catch {
-      return (await storageService.get(CACHE_KEYS.TAREAS)) || [];
+      const state = await NetInfo.fetch();
+      if (state.isConnected && state.isInternetReachable) {
+        const { data } = await TareasAPI.list();
+        await dbService.saveTareas(data);
+        await dbService.setLastSync();
+        return { data, isOffline: false, lastSync: new Date().toISOString() };
+      }
+      throw new Error("Offline");
+    } catch (err) {
+      const cached = await dbService.getTareas();
+      const lastSync = await dbService.getLastSync();
+      return { data: cached, isOffline: true, lastSync };
     }
   },
 
   async getMaterias() {
     try {
-      const { data } = await MateriasAPI.list();
-      await storageService.set(CACHE_KEYS.MATERIAS, data);
-      return data;
-    } catch {
-      return (await storageService.get(CACHE_KEYS.MATERIAS)) || [];
+      const state = await NetInfo.fetch();
+      if (state.isConnected && state.isInternetReachable) {
+        const { data } = await MateriasAPI.list();
+        await dbService.saveMaterias(data);
+        return { data, isOffline: false };
+      }
+      throw new Error("Offline");
+    } catch (err) {
+      const cached = await dbService.getMaterias();
+      return { data: cached, isOffline: true };
     }
   },
+
+  async createTarea(tareaData) {
+    try {
+      const state = await NetInfo.fetch();
+      if (state.isConnected && state.isInternetReachable) {
+        const { data } = await TareasAPI.create(tareaData);
+        return { data, synchronized: true };
+      }
+      throw new Error("Offline");
+    } catch (err) {
+      const tempId = `temp-${Date.now()}`;
+      const nuevaTarea = {
+        ...tareaData,
+        id: tempId,
+        estado: 'pendiente',
+        prioridad: 'media',
+        pendingSync: 1
+      };
+
+      await dbService.savePendingTarea(nuevaTarea);
+      return { data: nuevaTarea, synchronized: false };
+    }
+  },
+
+  async processOutbox() {
+    const state = await NetInfo.fetch();
+    if (!state.isConnected || !state.isInternetReachable) return;
+
+    const pending = await dbService.getPendingTareas();
+    if (pending.length === 0) return;
+
+    console.log(`Sincronizando ${pending.length} tareas pendientes...`);
+
+    for (const item of pending) {
+      try {
+        const { id, pendingSync, ...cleanData } = item;
+        const { data } = await TareasAPI.create(cleanData);
+        await dbService.markAsSynced(id, data.id);
+      } catch (err) {
+        console.error("Error sincronizando tarea individual:", err);
+      }
+    }
+  },
+
+  // Escuchador de red para auto-sincronización
+  subscribeToNetwork(callback) {
+    return NetInfo.addEventListener(state => {
+      if (state.isConnected && state.isInternetReachable) {
+        this.processOutbox().then(callback);
+      }
+    });
+  }
 };

@@ -1,20 +1,16 @@
 import React from "react";
-import { TouchableOpacity, View, Text, StyleSheet, Alert } from "react-native";
+import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-import { useNotifications } from "../hooks/useNotifications";
+import { useNotificationContext } from "../context/NotificationContext";
 import { colors } from "../utils/colors";
 
-// Nota: conecta este botón a una pantalla/modal de notificaciones cuando la agregues
-// a la navegación (por ejemplo dentro de PerfilScreen o como pantalla modal del stack).
 export default function HeaderRight() {
-  const { noLeidas, notificaciones } = useNotifications();
+  const { noLeidas } = useNotificationContext();
+  const navigation = useNavigation();
 
   const handlePress = () => {
-    if (notificaciones.length === 0) {
-      Alert.alert("Notificaciones", "No tienes notificaciones todavía.");
-      return;
-    }
-    Alert.alert("Notificaciones", `Tienes ${noLeidas} notificación(es) sin leer.`);
+    navigation.navigate("Notificaciones");
   };
 
   return (

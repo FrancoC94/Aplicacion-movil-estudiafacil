@@ -6,10 +6,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.core.exceptions import register_exception_handlers
 from app.core.logging import configure_logging, get_logger
-from app.core.rate_limit import limiter, rate_limit_exceeded_handler
+# from app.core.rate_limit import limiter, rate_limit_exceeded_handler
+# from slowapi.errors import RateLimitExceeded
 from app.middleware.correlation import CorrelationIdMiddleware
 from app.routes import auth, users, materias, tareas, recordatorios, notificaciones
-from slowapi.errors import RateLimitExceeded
 
 configure_logging()
 logger = get_logger(__name__)
@@ -30,8 +30,8 @@ app = FastAPI(
 )
 
 # Rate limiting
-app.state.limiter = limiter
-app.add_exception_handler(RateLimitExceeded, rate_limit_exceeded_handler)
+# app.state.limiter = limiter
+# app.add_exception_handler(RateLimitExceeded, rate_limit_exceeded_handler)
 
 # CORS
 app.add_middleware(

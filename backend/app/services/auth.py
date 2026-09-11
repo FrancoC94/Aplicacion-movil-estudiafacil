@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
 from app.core.exceptions import ConflictException, UnauthorizedException
-from app.core.security import hash_password, verify_password, create_access_token, create_refresh_token
+from app.core.security import hash_password, verify_password, create_access_token, create_refresh_token, decode_token
 from app.models.user import User
 from app.repositories.user import UserRepository
 from app.schemas.user import UserCreate
@@ -38,3 +38,16 @@ class AuthService:
             "refresh_token": create_refresh_token(str(user.id)),
             "token_type": "bearer",
         }
+
+    def refresh_tokens(self, refresh_token: str) -> dict:
+        try:
+            payload = decode_token(refresh_token)
+            if payload.get("type") != "refresh":
+                raise UnauthorizedException("Token de refresco inválido")
+            user_id = payload.get("sub")
+            user = self.repo.get_by_id(int(user_id))
+            if not user or not user.is_active:
+                raise UnauthorizedException("Usuario no encontrado o inactivo")
+            return self.create_tokens(user)
+        except ValueError:
+            raise UnauthorizedException("Token de refresco expirado o corrupto")

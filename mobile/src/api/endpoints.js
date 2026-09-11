@@ -15,6 +15,7 @@ export const AuthAPI = {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
     });
   },
+  refresh: (refreshToken) => apiClient.post("/auth/refresh", { refresh_token: refreshToken }),
 };
 
 export const UserAPI = {

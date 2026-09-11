@@ -1,26 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
+    <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bed1ca82-b8e1-4891-a896-51a7972bdbc5" name="Changes" comment="🚀 Proyecto EstudiaFácil - App Móvil + Backend&#10;&#10;📱 Aplicación móvil para organización académica&#10;&#10;🏫 Asignatura: Aplicaciones Móviles&#10;👨‍🏫 Docente: Ing. Julio César Hurtado Jerves Mg.&#10;👩‍🎓 Estudiantes:&#10;   - Mayra Reveca Amaguay Herrera&#10;   - Cristhian Javier Franco Muñoz&#10;📅 Fecha: 22 de Julio de 2026&#10;&#10;🛠️ Tecnologías:&#10;- Frontend: React Native + Expo + NativeBase&#10;- Backend: FastAPI + PostgreSQL + SQLAlchemy&#10;- Autenticación: JWT&#10;- Base de Datos: PostgreSQL 18&#10;&#10;✅ Funcionalidades:&#10;- Autenticación con JWT&#10;- Gestión de materias y tareas&#10;- Recordatorios automáticos&#10;- Notificaciones push&#10;- Interfaz profesional&#10;&#10;📁 Estructura:&#10;- mobile/ → App React Native&#10;- backend/ → API FastAPI&#10;- docs/ → Documentación&#10;- deploy/ → Configuración de despliegue">
-      <change afterPath="$PROJECT_DIR$/mobile/App.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.artifacts/79ac67d7-7c8c-45f2-ac4e-8a6f1c00f07d/implementation_plan.artifact.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/deviceManager.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/api_integration_report.artifact.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/offline_architecture.artifact.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mobile/docs/persistence_and_privacy.artifact.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mobile/src/components/common/OfflineBanner.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mobile/src/components/common/ProgressCircle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mobile/src/components/skeletons/SkeletonTarea.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mobile/src/screens/main/NotificacionesScreen.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mobile/src/services/dbService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/estudiafacil.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/estudiafacil.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/core/rate_limit.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/core/rate_limit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/core/security.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/core/security.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/routes/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/routes/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/services/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/services/auth.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobile/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/app.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobile/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobile/src/api/endpoints.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/api/endpoints.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/api/interceptors.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/api/interceptors.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/components/cards/TareaCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/components/cards/TareaCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/components/common/CustomButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/components/common/CustomButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/components/common/CustomInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/components/common/CustomInput.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/components/common/LoadingSpinner.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/components/common/LoadingSpinner.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/components/modals/NuevaMateriaModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/components/modals/NuevaMateriaModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/components/modals/NuevaTareaModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/components/modals/NuevaTareaModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mobile/src/context/AuthContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/context/AuthContext.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/src/screens/auth/LoginScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/screens/auth/LoginScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/src/screens/auth/RegisterScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/screens/auth/RegisterScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mobile/src/utils/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/utils/constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/context/ThemeContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/context/ThemeContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/navigation/HeaderRight.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/navigation/HeaderRight.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/navigation/MainTabNavigator.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/navigation/MainTabNavigator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/navigation/RootNavigator.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/navigation/RootNavigator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/screens/main/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/screens/main/HomeScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/screens/main/MateriasScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/screens/main/MateriasScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/screens/main/PerfilScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/screens/main/PerfilScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/screens/main/TareasScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/screens/main/TareasScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/services/storageService.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/services/storageService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/services/syncService.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/services/syncService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mobile/src/utils/colors.js" beforeDir="false" afterPath="$PROJECT_DIR$/mobile/src/utils/colors.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -118,19 +152,28 @@
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Cristhian Franco/Desktop/estudiafacil&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/estudiafacil&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.android.studio.ml.bot.mainConfigurable&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
   }
 }</component>
@@ -165,7 +208,15 @@
       <option name="project" value="LOCAL" />
       <updated>1784754881243</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="🚀 Proyecto EstudiaFácil - App Móvil + Backend&#10;&#10;📱 Aplicación móvil para organización académica&#10;&#10;🏫 Asignatura: Aplicaciones Móviles&#10;👨‍🏫 Docente: Ing. Julio César Hurtado Jerves Mg.&#10;👩‍🎓 Estudiantes:&#10;   - Mayra Reveca Amaguay Herrera&#10;   - Cristhian Javier Franco Muñoz&#10;📅 Fecha: 22 de Julio de 2026&#10;&#10;🛠️ Tecnologías:&#10;- Frontend: React Native + Expo + NativeBase&#10;- Backend: FastAPI + PostgreSQL + SQLAlchemy&#10;- Autenticación: JWT&#10;- Base de Datos: PostgreSQL 18&#10;&#10;✅ Funcionalidades:&#10;- Autenticación con JWT&#10;- Gestión de materias y tareas&#10;- Recordatorios automáticos&#10;- Notificaciones push&#10;- Interfaz profesional&#10;&#10;📁 Estructura:&#10;- mobile/ → App React Native&#10;- backend/ → API FastAPI&#10;- docs/ → Documentación&#10;- deploy/ → Configuración de despliegue">
+      <option name="closed" value="true" />
+      <created>1786890412499</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1786890412499</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,6 +236,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="avance aplicaicon movil estudiafacil.iml" />
     <MESSAGE value="avance aplicacion movil estudiafacil.iml" />
+    <MESSAGE value=" Proyecto EstudiaFácil - App Móvil + Backend&#10;&#10; Aplicación móvil para organización académica&#10;&#10; Asignatura: Aplicaciones Móviles&#10;‍ Docente: Ing. Julio César Hurtado Jerves Mg.&#10;‍ Estudiantes:&#10;   - Mayra Reveca Amaguay Herrera&#10;   - Cristhian Javier Franco Muñoz&#10; Fecha: 22 de Julio de 2026&#10;&#10;️ Tecnologías:&#10;- Frontend: React Native + Expo + NativeBase&#10;- Backend: FastAPI + PostgreSQL + SQLAlchemy&#10;- Autenticación: JWT&#10;- Base de Datos: PostgreSQL 18&#10;&#10;✅ Funcionalidades:&#10;- Autenticación con JWT&#10;- Gestión de materias y tareas&#10;- Recordatorios automáticos&#10;- Notificaciones push&#10;- Interfaz profesional&#10;&#10; Estructura:&#10;- mobile/ → App React Native&#10;- backend/ → API FastAPI&#10;- docs/ → Documentación&#10;- deploy/ → Configuración de despliegue" />
     <MESSAGE value=" Proyecto EstudiaFácil - App Móvil + Backend&#10;&#10; Aplicación móvil para organización académica&#10;&#10; Asignatura: Aplicaciones Móviles&#10;‍ Docente: Ing. Julio César Hurtado Jerves Mg.&#10;‍ Estudiantes:&#10;   - Mayra Reveca Amaguay Herrera&#10;   - Cristhian Javier Franco Muñoz&#10; Fecha: 22 de Julio de 2026&#10;&#10;️ Tecnologías:&#10;- Frontend: React Native + Expo + NativeBase&#10;- Backend: FastAPI + PostgreSQL + SQLAlchemy&#10;- Autenticación: JWT&#10;- Base de Datos: PostgreSQL 18&#10;&#10;✅ Funcionalidades:&#10;- Autenticación con JWT&#10;- Gestión de materias y tareas&#10;- Recordatorios automáticos&#10;- Notificaciones push&#10;- Interfaz profesional&#10;&#10; Estructura:&#10;- mobile/ → App React Native&#10;- backend/ → API FastAPI&#10;- docs/ → Documentación&#10;- deploy/ → Configuración de despliegue" />
     <option name="LAST_COMMIT_MESSAGE" value=" Proyecto EstudiaFácil - App Móvil + Backend&#10;&#10; Aplicación móvil para organización académica&#10;&#10; Asignatura: Aplicaciones Móviles&#10;‍ Docente: Ing. Julio César Hurtado Jerves Mg.&#10;‍ Estudiantes:&#10;   - Mayra Reveca Amaguay Herrera&#10;   - Cristhian Javier Franco Muñoz&#10; Fecha: 22 de Julio de 2026&#10;&#10;️ Tecnologías:&#10;- Frontend: React Native + Expo + NativeBase&#10;- Backend: FastAPI + PostgreSQL + SQLAlchemy&#10;- Autenticación: JWT&#10;- Base de Datos: PostgreSQL 18&#10;&#10;✅ Funcionalidades:&#10;- Autenticación con JWT&#10;- Gestión de materias y tareas&#10;- Recordatorios automáticos&#10;- Notificaciones push&#10;- Interfaz profesional&#10;&#10; Estructura:&#10;- mobile/ → App React Native&#10;- backend/ → API FastAPI&#10;- docs/ → Documentación&#10;- deploy/ → Configuración de despliegue" />
   </component>

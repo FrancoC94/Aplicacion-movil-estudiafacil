@@ -28,8 +28,22 @@ export default function MainTabNavigator() {
       screenOptions={({ route }) => ({
         headerRight: () => <HeaderRight />,
         tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: colors.textLight,
+        tabBarInactiveTintColor: colors.onSurfaceVariant,
         tabBarIcon: () => <Text style={{ fontSize: 18 }}>{ICONS[route.name]}</Text>,
+        tabBarLabelStyle: {
+          fontFamily: "Poppins_500Medium",
+          fontSize: 10,
+        },
+        headerTitleStyle: {
+          fontFamily: "Poppins_600SemiBold",
+          fontSize: 18,
+          color: colors.onSurface,
+        },
+        headerStyle: {
+          backgroundColor: colors.surface,
+          elevation: 0,
+          shadowOpacity: 0,
+        },
       })}
     >
       <Tab.Screen name="Inicio" component={HomeScreen} />

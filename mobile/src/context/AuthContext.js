@@ -4,6 +4,8 @@ import { AuthAPI, UserAPI } from "../api/endpoints";
 import { setupInterceptors } from "../api/interceptors";
 import { saveSecure, getSecure, deleteSecure } from "../utils/security";
 import { STORAGE_KEYS } from "../utils/constants";
+import { storageService } from "../services/storageService";
+import { dbService } from "../services/dbService";
 
 const AuthContext = createContext(null);
 
@@ -14,6 +16,8 @@ export function AuthProvider({ children }) {
   const logout = useCallback(async () => {
     await deleteSecure(STORAGE_KEYS.ACCESS_TOKEN);
     await deleteSecure(STORAGE_KEYS.REFRESH_TOKEN);
+    await storageService.clearAll();
+    await dbService.clearAll();
     setUser(null);
   }, []);
 
@@ -24,19 +28,25 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     (async () => {
       try {
+        await dbService.init();
         const token = await getSecure(STORAGE_KEYS.ACCESS_TOKEN);
         if (token) {
-          const { data } = await UserAPI.getMe();
-          setUser(data);
+          try {
+            const { data } = await UserAPI.getMe();
+            setUser(data);
+            await storageService.set("user_profile", data);
+          } catch (apiError) {
+            // Si es error de red o timeout, cargamos del caché local
+            const cachedUser = await storageService.get("user_profile");
+            if (cachedUser) {
+              setUser(cachedUser);
+            } else if (apiError.response?.status === 401) {
+              await logout();
+            }
+          }
         }
-      } catch {
-        // Un token inválido, un fallo de red o de SecureStore no debe bloquear
-        // la pantalla inicial: se elimina la sesión y se muestra el login.
-        try {
-          await logout();
-        } catch {
-          setUser(null);
-        }
+      } catch (err) {
+        console.error("Error al restaurar sesión:", err);
       } finally {
         setLoading(false);
       }
@@ -49,6 +59,7 @@ export function AuthProvider({ children }) {
     await saveSecure(STORAGE_KEYS.REFRESH_TOKEN, data.refresh_token);
     const me = await UserAPI.getMe();
     setUser(me.data);
+    await storageService.set("user_profile", me.data);
   };
 
   const register = async (nombre, email, password) => {

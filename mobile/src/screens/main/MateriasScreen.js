@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { View, FlatList, StyleSheet, TouchableOpacity, Text } from "react-native";
 
-import { MateriasAPI, TareasAPI } from "../../api/endpoints";
+import { syncService } from "../../services/syncService";
 import MateriaCard from "../../components/cards/MateriaCard";
 import NuevaMateriaModal from "../../components/modals/NuevaMateriaModal";
 import EmptyState from "../../components/common/EmptyState";
 import LoadingSpinner from "../../components/common/LoadingSpinner";
+import OfflineBanner from "../../components/common/OfflineBanner";
 import { colors } from "../../utils/colors";
 
 export default function MateriasScreen() {
@@ -13,11 +14,16 @@ export default function MateriasScreen() {
   const [tareas, setTareas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
+  const [isOffline, setIsOffline] = useState(false);
 
   const load = useCallback(async () => {
-    const [materiasRes, tareasRes] = await Promise.all([MateriasAPI.list(), TareasAPI.list()]);
+    const [materiasRes, tareasRes] = await Promise.all([
+      syncService.getMaterias(),
+      syncService.getTareas(),
+    ]);
     setMaterias(materiasRes.data);
     setTareas(tareasRes.data);
+    setIsOffline(materiasRes.isOffline || tareasRes.isOffline);
     setLoading(false);
   }, []);
 
@@ -29,7 +35,7 @@ export default function MateriasScreen() {
     tareas.filter((t) => t.materia_id === materiaId && t.estado !== "completada").length;
 
   const handleCreate = async (data) => {
-    await MateriasAPI.create(data);
+    await syncService.createMateria(data);
     await load();
   };
 
@@ -37,6 +43,7 @@ export default function MateriasScreen() {
 
   return (
     <View style={styles.container}>
+      <OfflineBanner visible={isOffline} />
       <FlatList
         data={materias}
         keyExtractor={(item) => String(item.id)}
@@ -44,7 +51,7 @@ export default function MateriasScreen() {
           <MateriaCard materia={item} tareasPendientes={pendientesPorMateria(item.id)} onPress={() => {}} />
         )}
         ListEmptyComponent={<EmptyState title="Aún no tienes materias" subtitle="Agrega tu primera materia" />}
-        contentContainerStyle={{ paddingBottom: 90 }}
+        contentContainerStyle={{ paddingBottom: 90, paddingHorizontal: 16, paddingTop: 16 }}
       />
 
       <TouchableOpacity style={styles.fab} onPress={() => setModalVisible(true)}>
@@ -57,7 +64,7 @@ export default function MateriasScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.background, padding: 16 },
+  container: { flex: 1, backgroundColor: colors.background },
   fab: {
     position: "absolute",
     right: 20,

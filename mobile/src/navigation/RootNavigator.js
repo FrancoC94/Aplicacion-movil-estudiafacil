@@ -6,6 +6,7 @@ import AuthNavigator from "./AuthNavigator";
 import MainTabNavigator from "./MainTabNavigator";
 import SplashScreen from "../screens/auth/SplashScreen";
 import OnboardingScreen from "../screens/onboarding/OnboardingScreen";
+import NotificacionesScreen from "../screens/main/NotificacionesScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +18,14 @@ export default function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       {user ? (
-        <Stack.Screen name="Main" component={MainTabNavigator} />
+        <>
+          <Stack.Screen name="Main" component={MainTabNavigator} />
+          <Stack.Screen
+            name="Notificaciones"
+            component={NotificacionesScreen}
+            options={{ headerShown: true, title: "Notificaciones" }}
+          />
+        </>
       ) : (
         <>
           <Stack.Screen name="Onboarding" component={OnboardingScreen} />
