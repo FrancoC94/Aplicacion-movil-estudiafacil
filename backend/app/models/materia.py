@@ -19,3 +19,5 @@ class Materia(Base):
 
     propietario = relationship("User", back_populates="materias")
     tareas = relationship("Tarea", back_populates="materia", cascade="all, delete-orphan")
+    horarios = relationship("Horario", back_populates="materia", cascade="all, delete-orphan")
+    evaluaciones = relationship("Evaluacion", back_populates="materia", cascade="all, delete-orphan")
