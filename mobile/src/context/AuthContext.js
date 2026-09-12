@@ -28,7 +28,11 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     (async () => {
       try {
-        await dbService.init();
+        try {
+          await dbService.init();
+        } catch (dbErr) {
+          console.warn("SQLite init failed, running without local cache:", dbErr);
+        }
         const token = await getSecure(STORAGE_KEYS.ACCESS_TOKEN);
         if (token) {
           try {

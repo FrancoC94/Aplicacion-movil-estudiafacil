@@ -1,9 +1,17 @@
 import * as SQLite from 'expo-sqlite';
 
-const db = SQLite.openDatabaseSync('estudiafacil.db');
+let _db = null;
+
+function getDb() {
+  if (!_db) {
+    _db = SQLite.openDatabaseSync('estudiafacil.db');
+  }
+  return _db;
+}
 
 export const dbService = {
   async init() {
+    const db = getDb();
     await db.execAsync(`
       PRAGMA journal_mode = WAL;
       CREATE TABLE IF NOT EXISTS materias (
@@ -30,6 +38,7 @@ export const dbService = {
   },
 
   async clearAll() {
+    const db = getDb();
     await db.execAsync(`
       DELETE FROM materias;
       DELETE FROM tareas;
@@ -39,6 +48,7 @@ export const dbService = {
 
   // Materias
   async saveMaterias(materias) {
+    const db = getDb();
     for (const m of materias) {
       await db.runAsync(
         'INSERT OR REPLACE INTO materias (id, nombre, color, usuario_id) VALUES (?, ?, ?, ?)',
@@ -48,11 +58,13 @@ export const dbService = {
   },
 
   async getMaterias() {
+    const db = getDb();
     return await db.getAllAsync('SELECT * FROM materias');
   },
 
   // Tareas
   async saveTareas(tareas) {
+    const db = getDb();
     // Primero limpiamos las que no están pendientes de sincronizar para evitar basura
     await db.runAsync('DELETE FROM tareas WHERE pendingSync = 0');
     for (const t of tareas) {
@@ -64,6 +76,7 @@ export const dbService = {
   },
 
   async savePendingTarea(tarea) {
+    const db = getDb();
     await db.runAsync(
       'INSERT INTO tareas (id, titulo, descripcion, fecha_entrega, estado, prioridad, materia_id, pendingSync) VALUES (?, ?, ?, ?, ?, ?, ?, 1)',
       [tarea.id, tarea.titulo, tarea.descripcion, tarea.fecha_entrega, tarea.estado, tarea.prioridad, tarea.materia_id]
@@ -71,24 +84,29 @@ export const dbService = {
   },
 
   async getTareas() {
+    const db = getDb();
     return await db.getAllAsync('SELECT * FROM tareas ORDER BY fecha_entrega ASC');
   },
 
   async getPendingTareas() {
+    const db = getDb();
     return await db.getAllAsync('SELECT * FROM tareas WHERE pendingSync = 1');
   },
 
   async markAsSynced(tempId, serverId) {
+    const db = getDb();
     await db.runAsync('UPDATE tareas SET id = ?, pendingSync = 0 WHERE id = ?', [serverId, tempId]);
   },
 
   // Meta (Sync stats)
   async setLastSync() {
+    const db = getDb();
     const now = new Date().toISOString();
     await db.runAsync('INSERT OR REPLACE INTO meta (key, value) VALUES (?, ?)', ['lastSync', now]);
   },
 
   async getLastSync() {
+    const db = getDb();
     const res = await db.getFirstAsync('SELECT value FROM meta WHERE key = ?', ['lastSync']);
     return res ? res.value : null;
   }
