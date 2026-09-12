@@ -1,19 +1,42 @@
-# Backend
-backend/venv/
-backend/__pycache__/
-backend/**/__pycache__/
-backend/.pytest_cache/
-backend/*.egg-info/
+﻿# Entornos virtuales
+.venv/
+venv/
+env/
+.venv-mobile-check/
 
-# Mobile
-mobile/node_modules/
-mobile/.expo/
-mobile/dist/
-mobile/web-build/
+# Configuración del editor
+.idea/
+.vscode/
 
-# Entornos
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Node
+node_modules/
+mobile/android/
+mobile/ios/
+
+# Variables de entorno (¡NUNCA SUBIR!)
 .env
-*.env.production
+.env.production
+.env.local
+*.env
 
-# Sistema
-.DS_Store
+# Bases de datos
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs temporales
+*.log
+*_err.txt
+*_out.txt
+expo_*.txt
+uvicorn_*.txt
+
+# Compilados
+build/
+dist/
