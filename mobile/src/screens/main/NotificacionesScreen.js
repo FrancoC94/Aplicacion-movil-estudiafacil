@@ -9,8 +9,11 @@ export default function NotificacionesScreen() {
   const renderItem = ({ item }) => (
     <View style={[styles.card, item.leida && styles.readCard]}>
       <View style={styles.content}>
+        {item.titulo ? <Text style={styles.title}>{item.titulo}</Text> : null}
         <Text style={styles.message}>{item.mensaje}</Text>
-        <Text style={styles.date}>{new Date(item.fecha_creacion).toLocaleDateString()}</Text>
+        <Text style={styles.date}>
+          {item.created_at ? new Date(item.created_at).toLocaleDateString() : ""}
+        </Text>
       </View>
       {!item.leida && (
         <TouchableOpacity style={styles.button} onPress={() => marcarLeida(item.id)}>
@@ -47,7 +50,8 @@ const styles = StyleSheet.create({
   },
   readCard: { opacity: 0.6 },
   content: { flex: 1 },
-  message: { fontSize: 16, color: colors.text, marginBottom: 4 },
+  title: { fontSize: 15, fontWeight: '700', color: colors.text, marginBottom: 2 },
+  message: { fontSize: 14, color: colors.textSecondary, marginBottom: 4 },
   date: { fontSize: 12, color: colors.textSecondary },
   button: {
     backgroundColor: colors.primary,

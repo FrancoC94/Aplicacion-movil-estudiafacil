@@ -35,7 +35,7 @@ export default function NuevaTareaModal({ visible, onClose, onSubmit, materias }
       await onSubmit({
         titulo,
         descripcion,
-        fecha_entrega: fechaEntrega.toISOString().split('T')[0],
+        fecha_entrega: fechaEntrega.toISOString(),
         materia_id: materiaId
       });
       setTitulo("");

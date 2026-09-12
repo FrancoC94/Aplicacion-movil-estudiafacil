@@ -45,7 +45,7 @@ class AuthService:
             if payload.get("type") != "refresh":
                 raise UnauthorizedException("Token de refresco inválido")
             user_id = payload.get("sub")
-            user = self.repo.get_by_id(int(user_id))
+            user = self.repo.get(int(user_id))
             if not user or not user.is_active:
                 raise UnauthorizedException("Usuario no encontrado o inactivo")
             return self.create_tokens(user)

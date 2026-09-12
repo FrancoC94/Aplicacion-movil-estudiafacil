@@ -39,3 +39,34 @@ def test_login_wrong_password(client):
         data={"username": "ana@example.com", "password": "wrongpass"},
     )
     assert response.status_code == 401
+
+
+def test_refresh_token_success(client):
+    client.post(
+        "/auth/register",
+        json={"nombre": "Carlos Gómez", "email": "carlos@example.com", "password": "password123"},
+    )
+    login_res = client.post(
+        "/auth/login",
+        data={"username": "carlos@example.com", "password": "password123"},
+    )
+    assert login_res.status_code == 200
+    refresh_token = login_res.json()["refresh_token"]
+
+    refresh_res = client.post(
+        "/auth/refresh",
+        json={"refresh_token": refresh_token},
+    )
+    assert refresh_res.status_code == 200
+    data = refresh_res.json()
+    assert "access_token" in data
+    assert "refresh_token" in data
+
+
+def test_refresh_token_invalid(client):
+    response = client.post(
+        "/auth/refresh",
+        json={"refresh_token": "token_invalido_123"},
+    )
+    assert response.status_code == 401
+

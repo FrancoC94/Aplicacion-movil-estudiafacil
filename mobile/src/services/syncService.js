@@ -1,12 +1,21 @@
 import { TareasAPI, MateriasAPI } from "../api/endpoints";
 import { dbService } from "./dbService";
-import * as NetInfo from "@react-native-community/netinfo";
+import * as Network from "expo-network";
 
 export const syncService = {
+  async isOnline() {
+    try {
+      const state = await Network.getNetworkStateAsync();
+      return Boolean(state.isConnected && state.isInternetReachable !== false);
+    } catch {
+      return false;
+    }
+  },
+
   async getTareas() {
     try {
-      const state = await NetInfo.fetch();
-      if (state.isConnected && state.isInternetReachable) {
+      const online = await this.isOnline();
+      if (online) {
         const { data } = await TareasAPI.list();
         await dbService.saveTareas(data);
         await dbService.setLastSync();
@@ -22,8 +31,8 @@ export const syncService = {
 
   async getMaterias() {
     try {
-      const state = await NetInfo.fetch();
-      if (state.isConnected && state.isInternetReachable) {
+      const online = await this.isOnline();
+      if (online) {
         const { data } = await MateriasAPI.list();
         await dbService.saveMaterias(data);
         return { data, isOffline: false };
@@ -35,10 +44,34 @@ export const syncService = {
     }
   },
 
+  async createMateria(materiaData) {
+    try {
+      const online = await this.isOnline();
+      if (online) {
+        const { data } = await MateriasAPI.create(materiaData);
+        const materias = await dbService.getMaterias();
+        await dbService.saveMaterias([...materias, data]);
+        return { data, synchronized: true };
+      }
+      throw new Error("Offline");
+    } catch (err) {
+      const tempId = Date.now();
+      const nuevaMateria = {
+        ...materiaData,
+        id: tempId,
+        color: materiaData.color || "#4A90D9",
+        usuario_id: 0,
+      };
+      const materias = await dbService.getMaterias();
+      await dbService.saveMaterias([...materias, nuevaMateria]);
+      return { data: nuevaMateria, synchronized: false };
+    }
+  },
+
   async createTarea(tareaData) {
     try {
-      const state = await NetInfo.fetch();
-      if (state.isConnected && state.isInternetReachable) {
+      const online = await this.isOnline();
+      if (online) {
         const { data } = await TareasAPI.create(tareaData);
         return { data, synchronized: true };
       }
@@ -59,8 +92,8 @@ export const syncService = {
   },
 
   async processOutbox() {
-    const state = await NetInfo.fetch();
-    if (!state.isConnected || !state.isInternetReachable) return;
+    const online = await this.isOnline();
+    if (!online) return;
 
     const pending = await dbService.getPendingTareas();
     if (pending.length === 0) return;
@@ -80,10 +113,23 @@ export const syncService = {
 
   // Escuchador de red para auto-sincronización
   subscribeToNetwork(callback) {
-    return NetInfo.addEventListener(state => {
-      if (state.isConnected && state.isInternetReachable) {
-        this.processOutbox().then(callback);
+    let active = true;
+    const interval = setInterval(async () => {
+      try {
+        const online = await this.isOnline();
+        if (active && online) {
+          await this.processOutbox();
+          if (callback) callback();
+        }
+      } catch {
+        // Silencioso
       }
-    });
+    }, 15000);
+
+    return () => {
+      active = false;
+      clearInterval(interval);
+    };
   }
 };
+

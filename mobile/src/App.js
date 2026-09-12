@@ -2,12 +2,12 @@ import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
+import { useFonts } from "expo-font";
 import {
-  useFonts,
   Poppins_400Regular,
   Poppins_500Medium,
   Poppins_600SemiBold,
-  Poppins_700Bold
+  Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
 import { View, ActivityIndicator } from "react-native";
 

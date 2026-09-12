@@ -109,7 +109,7 @@ export default function HomeScreen({ navigation }) {
         renderItem={({ item }) => (
           <TareaCard
             tarea={item}
-            onPress={() => navigation.navigate("TareasDetail", { tareaId: item.id })}
+            onPress={() => navigation.navigate("Tareas")}
           />
         )}
         ListEmptyComponent={
