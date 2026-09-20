@@ -1,4 +1,5 @@
-import { TareasAPI, MateriasAPI } from "../api/endpoints";
+import { TareasAPI, MateriasAPI, RecordatoriosAPI, UserAPI } from "../api/endpoints";
+import { storageService } from "./storageService";
 import { dbService } from "./dbService";
 import * as Network from "expo-network";
 
@@ -91,14 +92,49 @@ export const syncService = {
     }
   },
 
+  async saveReminder(tareaId, notificationId, fechaRecordatorio) {
+    const reminder = { tareaId, notificationId, fechaRecordatorio, estado: "local", pendingBackend: true };
+    await dbService.saveReminder(reminder);
+    try {
+      if (!await this.isOnline() || String(tareaId).startsWith("temp-")) throw new Error("Offline");
+      await RecordatoriosAPI.create({ tarea_id: tareaId, fecha_recordatorio: fechaRecordatorio });
+      await dbService.markReminderSynced(tareaId);
+      return { synchronized: true };
+    } catch {
+      return { synchronized: false };
+    }
+  },
+
+  async saveStudyLocation(location) {
+    const serialized = JSON.stringify(location);
+    await storageService.set("study_location", location);
+    try {
+      if (!await this.isOnline()) throw new Error("Offline");
+      const { data } = await UserAPI.updateMe({ ubicacion_estudio: serialized });
+      await storageService.set("user_profile", data);
+      await storageService.remove("pending_study_location");
+      return { synchronized: true, user: data };
+    } catch {
+      await storageService.set("pending_study_location", location);
+      return { synchronized: false };
+    }
+  },
+
+  async syncPendingStudyLocation() {
+    const location = await storageService.get("pending_study_location");
+    if (!location || !await this.isOnline()) return false;
+    const { data } = await UserAPI.updateMe({ ubicacion_estudio: JSON.stringify(location) });
+    await storageService.set("user_profile", data);
+    await storageService.remove("pending_study_location");
+    return true;
+  },
+
   async processOutbox() {
     const online = await this.isOnline();
     if (!online) return;
 
     const pending = await dbService.getPendingTareas();
-    if (pending.length === 0) return;
-
-    console.log(`Sincronizando ${pending.length} tareas pendientes...`);
+    if (pending.length > 0) console.log(`Sincronizando ${pending.length} tareas pendientes...`);
 
     for (const item of pending) {
       try {
@@ -109,6 +145,18 @@ export const syncService = {
         console.error("Error sincronizando tarea individual:", err);
       }
     }
+
+    const reminders = await dbService.getPendingReminders();
+    for (const reminder of reminders) {
+      try {
+        if (String(reminder.tarea_id).startsWith("temp-")) continue;
+        await RecordatoriosAPI.create({ tarea_id: Number(reminder.tarea_id), fecha_recordatorio: reminder.fecha_recordatorio });
+        await dbService.markReminderSynced(reminder.tarea_id);
+      } catch (err) {
+        console.error("Error sincronizando recordatorio:", err);
+      }
+    }
+    try { await this.syncPendingStudyLocation(); } catch { /* se conserva pendiente */ }
   },
 
   // Escuchador de red para auto-sincronización
@@ -132,4 +180,3 @@ export const syncService = {
     };
   }
 };
-

@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { View, FlatList, StyleSheet, TouchableOpacity, Text, Alert } from "react-native";
+import { View, FlatList, StyleSheet, TouchableOpacity, Text, Alert, Linking } from "react-native";
 
 import { syncService } from "../../services/syncService";
+import { requestNotificationPermissions, scheduleLocalReminder } from "../../services/notificationService";
 import TareaCard from "../../components/cards/TareaCard";
 import NuevaTareaModal from "../../components/modals/NuevaTareaModal";
 import EmptyState from "../../components/common/EmptyState";
@@ -38,8 +39,42 @@ export default function TareasScreen({ navigation }) {
     return () => unsubscribe();
   }, [load]);
 
+  const askNotificationPermission = () => new Promise((resolve) => {
+    Alert.alert(
+      "Recordatorio de tarea",
+      "Usaremos notificaciones locales únicamente para avisarte de esta tarea en tu dispositivo. Puedes continuar sin activar notificaciones.",
+      [{ text: "Ahora no", style: "cancel", onPress: () => resolve(false) }, { text: "Continuar", onPress: () => resolve(true) }]
+    );
+  });
+
   const handleCreate = async (data) => {
-    await syncService.createTarea(data);
+    const { recordatorio, ...tareaData } = data;
+    const result = await syncService.createTarea(tareaData);
+    if (recordatorio) {
+      const accepted = await askNotificationPermission();
+      if (accepted) {
+        const permission = await requestNotificationPermissions();
+        if (permission === "granted") {
+          try {
+            const notificationId = await scheduleLocalReminder(
+              "Recordatorio de tarea",
+              tareaData.titulo,
+              new Date(tareaData.fecha_entrega)
+            );
+            await syncService.saveReminder(result.data.id, notificationId, tareaData.fecha_entrega);
+          } catch {
+            Alert.alert("Recordatorio no programado", "La tarea se guardó, pero la fecha del recordatorio ya pasó o no está disponible.");
+          }
+        } else if (permission === "blocked") {
+          Alert.alert("Notificaciones bloqueadas", "La tarea se creó sin recordatorio. Activa las notificaciones de EstudiaFácil en Ajustes si deseas usarlas.", [
+            { text: "Cancelar", style: "cancel" },
+            { text: "Abrir Ajustes", onPress: () => Linking.openSettings() },
+          ]);
+        } else {
+          Alert.alert("Sin notificación", "La tarea se creó correctamente sin recordatorio porque no concediste el permiso.");
+        }
+      }
+    }
     await load();
   };
 

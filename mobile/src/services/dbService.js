@@ -34,6 +34,13 @@ export const dbService = {
         key TEXT PRIMARY KEY NOT NULL,
         value TEXT
       );
+      CREATE TABLE IF NOT EXISTS recordatorios_locales (
+        tarea_id TEXT PRIMARY KEY NOT NULL,
+        notification_id TEXT,
+        fecha_recordatorio TEXT NOT NULL,
+        estado TEXT NOT NULL,
+        pendiente_backend INTEGER DEFAULT 0
+      );
     `);
   },
 
@@ -43,6 +50,7 @@ export const dbService = {
       DELETE FROM materias;
       DELETE FROM tareas;
       DELETE FROM meta;
+      DELETE FROM recordatorios_locales;
     `);
   },
 
@@ -96,6 +104,25 @@ export const dbService = {
   async markAsSynced(tempId, serverId) {
     const db = getDb();
     await db.runAsync('UPDATE tareas SET id = ?, pendingSync = 0 WHERE id = ?', [serverId, tempId]);
+    await db.runAsync('UPDATE recordatorios_locales SET tarea_id = ? WHERE tarea_id = ?', [String(serverId), String(tempId)]);
+  },
+
+  async saveReminder(reminder) {
+    const db = getDb();
+    await db.runAsync(
+      'INSERT OR REPLACE INTO recordatorios_locales (tarea_id, notification_id, fecha_recordatorio, estado, pendiente_backend) VALUES (?, ?, ?, ?, ?)',
+      [String(reminder.tareaId), reminder.notificationId || null, reminder.fechaRecordatorio, reminder.estado, reminder.pendingBackend ? 1 : 0]
+    );
+  },
+
+  async getPendingReminders() {
+    const db = getDb();
+    return db.getAllAsync('SELECT * FROM recordatorios_locales WHERE pendiente_backend = 1');
+  },
+
+  async markReminderSynced(tareaId) {
+    const db = getDb();
+    await db.runAsync('UPDATE recordatorios_locales SET pendiente_backend = 0, estado = ? WHERE tarea_id = ?', ['sincronizado', String(tareaId)]);
   },
 
   // Meta (Sync stats)

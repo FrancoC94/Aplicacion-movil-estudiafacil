@@ -11,6 +11,7 @@ class UserBase(BaseModel):
     semestre_ciclo: str | None = None
     avatar_url: str | None = None
     telefono: str | None = None
+    ubicacion_estudio: str | None = Field(None, max_length=255)
 
 
 class UserCreate(UserBase):
@@ -25,6 +26,7 @@ class UserUpdate(BaseModel):
     semestre_ciclo: str | None = None
     avatar_url: str | None = None
     telefono: str | None = None
+    ubicacion_estudio: str | None = Field(None, max_length=255)
 
 
 class UserOut(UserBase):

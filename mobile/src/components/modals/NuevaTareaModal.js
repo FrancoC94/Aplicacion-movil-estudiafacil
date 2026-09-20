@@ -1,6 +1,6 @@
 // Trigger reload
 import React, { useState, useEffect } from "react";
-import { Modal, View, Text, StyleSheet, ScrollView, Platform, TouchableOpacity } from "react-native";
+import { Modal, View, Text, StyleSheet, ScrollView, Platform, TouchableOpacity, Switch } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
@@ -15,6 +15,7 @@ export default function NuevaTareaModal({ visible, onClose, onSubmit, materias }
   const [materiaId, setMateriaId] = useState("");
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [recordatorio, setRecordatorio] = useState(false);
 
   useEffect(() => {
     if (materias && materias.length > 0 && !materiaId) {
@@ -36,11 +37,13 @@ export default function NuevaTareaModal({ visible, onClose, onSubmit, materias }
         titulo,
         descripcion,
         fecha_entrega: fechaEntrega.toISOString(),
-        materia_id: materiaId
+        materia_id: materiaId,
+        recordatorio
       });
       setTitulo("");
       setDescripcion("");
       setFechaEntrega(new Date());
+      setRecordatorio(false);
       onClose();
     } finally {
       setLoading(false);
@@ -89,6 +92,13 @@ export default function NuevaTareaModal({ visible, onClose, onSubmit, materias }
                 onChange={onChangeDate}
               />
             )}
+            <View style={styles.reminderRow}>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.label}>Recordatorio local</Text>
+                <Text style={styles.hint}>Te avisará en este dispositivo en la fecha elegida.</Text>
+              </View>
+              <Switch value={recordatorio} onValueChange={setRecordatorio} />
+            </View>
           </ScrollView>
           <CustomButton title="Guardar tarea" onPress={handleSubmit} loading={loading} />
           <CustomButton title="Cancelar" onPress={onClose} variant="outline" />
@@ -124,4 +134,6 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   dateText: { fontSize: 16, color: colors.text },
+  reminderRow: { flexDirection: "row", alignItems: "center", marginBottom: 20 },
+  hint: { color: "#666", fontSize: 12, marginTop: -4, marginRight: 12 },
 });

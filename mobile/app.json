@@ -16,18 +16,28 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.estudiafacil.app"
+      "bundleIdentifier": "com.estudiafacil.app",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "EstudiaFácil usa tu ubicación aproximada solo cuando eliges guardar tu lugar de estudio.",
+        "NSUserNotificationUsageDescription": "EstudiaFácil envía recordatorios locales de las tareas que decidas programar."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#4A90D9"
       },
-      "package": "com.estudiafacil.app"
+      "package": "com.estudiafacil.app",
+      "permissions": [
+        "android.permission.POST_NOTIFICATIONS",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ]
     },
     "plugins": [
       "expo-secure-store",
       "expo-notifications",
+      "expo-location",
       "@react-native-community/datetimepicker",
       "expo-sqlite",
       "expo-font"

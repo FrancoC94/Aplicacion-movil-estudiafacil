@@ -18,6 +18,8 @@ class User(Base):
     semestre_ciclo: Mapped[str | None] = mapped_column(String(50), nullable=True)
     avatar_url: Mapped[str | None] = mapped_column(String(255), nullable=True)
     telefono: Mapped[str | None] = mapped_column(String(30), nullable=True)
+    # Solo una referencia aproximada elegida explícitamente por el usuario; nunca ubicación en segundo plano.
+    ubicacion_estudio: Mapped[str | None] = mapped_column(String(255), nullable=True)
     rol: Mapped[str] = mapped_column(String(20), default="estudiante", server_default="estudiante")
     last_login: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
