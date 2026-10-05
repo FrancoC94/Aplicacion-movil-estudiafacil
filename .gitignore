@@ -40,3 +40,12 @@ uvicorn_*.txt
 # Compilados
 build/
 dist/
+
+# Compilados y empaquetados
+*.apk
+*.aab
+
+# Firmas y claves de seguridad (NUNCA SUBIR)
+*.keystore
+*.jks
+local.properties

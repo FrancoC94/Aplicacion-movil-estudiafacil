@@ -8,10 +8,8 @@ export const HealthAPI = {
 export const AuthAPI = {
   register: (data) => apiClient.post("/auth/register", data),
   login: (email, password) => {
-    const form = new URLSearchParams();
-    form.append("username", email);
-    form.append("password", password);
-    return apiClient.post("/auth/login", form, {
+    const body = `username=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
+    return apiClient.post("/auth/login", body, {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
     });
   },

@@ -78,11 +78,13 @@ export function setupInterceptors(onUnauthorized) {
       }
 
       // Manejo de errores de validación 422 (FastAPI)
-      if (error.response?.status === 422) {
+      if (error.response?.status === 422 && Array.isArray(error.response?.data?.detail)) {
         // Transformamos el error para que sea más fácil de usar en el cliente
         error.validationErrors = error.response.data.detail.reduce((acc, curr) => {
-            const field = curr.loc[curr.loc.length - 1];
-            acc[field] = curr.msg;
+            if (curr && Array.isArray(curr.loc) && curr.loc.length > 0) {
+              const field = curr.loc[curr.loc.length - 1];
+              acc[field] = curr.msg;
+            }
             return acc;
         }, {});
       }

@@ -7,7 +7,7 @@ export const syncService = {
   async isOnline() {
     try {
       const state = await Network.getNetworkStateAsync();
-      return Boolean(state.isConnected && state.isInternetReachable !== false);
+      return Boolean(state.isConnected);
     } catch {
       return false;
     }
